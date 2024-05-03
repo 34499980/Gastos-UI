@@ -17,10 +17,11 @@ import { BrowserModule } from '@angular/platform-browser';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],
   standalone: true,
-  imports: [MatSidenavModule,
-            MatToolbarModule,
-            MatListModule,
+  imports: [MatToolbarModule,
             MatIconModule,
+            MatSidenavModule,
+            MatIconModule,
+            MatListModule,
             RouterModule,
             CommonModule ]
 })

@@ -4,6 +4,7 @@ import { Item } from "../models/item.model";
 import { ConfigsLoaderService } from "./config-loader.service";
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from "@angular/core";
+import { Category } from "../models/models";
 
 @Injectable({
     providedIn: 'root'
@@ -20,7 +21,7 @@ import { Injectable } from "@angular/core";
       }
 
     
-  public getAll(): Observable<Item[]> {   
-    return this.httpClient.get<Item[]>(`${this.apiEndpoint}/Category/getAll`)
+  public getAll(): Observable<Category[]> {   
+    return this.httpClient.get<Category[]>(`${this.apiEndpoint}/Category/getAll`)
   }
   }
