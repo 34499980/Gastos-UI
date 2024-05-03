@@ -1,4 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
+
+import { Component, OnInit, Inject } from '@angular/core';
 import { CategryService } from '../../../services/category.service';
 
 @Component({

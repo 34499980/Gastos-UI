@@ -1,5 +1,6 @@
-import { NgModule } from '@angular/core';
-import { Route, RouterModule, Routes } from '@angular/router';
+
+
+import { Route } from '@angular/router';
 import { AppRoutePaths } from './enums/path.enums';
 import categoryRoutes from './modules/Categories/category.routes';
 

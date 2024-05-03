@@ -1,5 +1,5 @@
-import { APP_INITIALIZER, inject } from "@angular/core";
-import { ApplicationConfig } from "@angular/platform-browser";
+import { provideHttpClient, withInterceptors } from "@angular/common/http";
+import { ApplicationConfig, APP_INITIALIZER, inject } from "@angular/core";
 import { provideRouter } from "@angular/router";
 import { appRoutes } from "./app-routes";
 import { ConfigsLoaderService } from "./services/config-loader.service";
@@ -7,9 +7,9 @@ import { ConfigsLoaderService } from "./services/config-loader.service";
 
 export const appConfig: ApplicationConfig = {
     providers: [
-        provideRouter(appRoutes)
-            ,
-          
+       
+        provideHttpClient(),
+        provideRouter(appRoutes),
         {   // load config and other initial data
             provide   : APP_INITIALIZER,
             useFactory: () =>

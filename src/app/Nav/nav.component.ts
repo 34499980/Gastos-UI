@@ -1,9 +1,9 @@
-import { Component, Inject } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { AppRoutePaths } from '../enums/path.enums';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import { Component } from '@angular/core';
 
 
 @Component({
@@ -11,7 +11,7 @@ import {MatSidenavModule} from '@angular/material/sidenav';
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],
   standalone: true,
-  imports: [MatSidenavModule]
+  imports: [MatSidenavModule,]
 })
 export class NavComponent {
 
