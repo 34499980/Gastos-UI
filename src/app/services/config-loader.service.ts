@@ -1,6 +1,7 @@
-import { HttpBackend, HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { firstValueFrom } from "rxjs";
+
+import { HttpClient, HttpBackend } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import packageJson from '../../../package.json';
 
 @Injectable({

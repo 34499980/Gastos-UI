@@ -1,3 +1,4 @@
 export enum AppRoutePaths {
-    CATEGORIESLIST = 'Categories_list'
+    CATEGORIESLIST = 'Categories_list',
+    CATEGORY = 'Category'
 }
