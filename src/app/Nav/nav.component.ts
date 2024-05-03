@@ -4,14 +4,25 @@ import { map, shareReplay } from 'rxjs/operators';
 import { AppRoutePaths } from '../enums/path.enums';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { Component } from '@angular/core';
-
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatListModule} from '@angular/material/list';
+import {MatIconModule} from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
 
 @Component({
   selector: 'nav',
   templateUrl: './nav.component.html',
   styleUrls: ['./nav.component.scss'],
   standalone: true,
-  imports: [MatSidenavModule,]
+  imports: [MatSidenavModule,
+            MatToolbarModule,
+            MatListModule,
+            MatIconModule,
+            RouterModule,
+            CommonModule ]
 })
 export class NavComponent {
 

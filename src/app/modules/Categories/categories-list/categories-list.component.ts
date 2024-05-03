@@ -1,21 +1,25 @@
 
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, inject } from '@angular/core';
+import { MatSidenavModule } from '@angular/material/sidenav';
 import { CategryService } from '../../../services/category.service';
 
 @Component({
   selector: 'app-categories-list',
   templateUrl: './categories-list.component.html',
   styleUrls: ['./categories-list.component.scss'],
-  standalone: true
+  standalone: true,
+  imports: [MatSidenavModule,]
 })
-export class CategoriesListComponent implements OnInit {
-  categoryService = Inject(CategryService);
+export default class CategoriesListComponent implements OnInit {
+  categoryService = inject(CategryService);
+
   ngOnInit(): void {
- /*   this.categoryService.getAll().subscribe({
+    console.log('Entra')
+    this.categoryService.getAll().subscribe({
       next: res => {
         console.log(res)
       } 
-    })*/
+    })
   }
 
 }
