@@ -1,9 +1,18 @@
+<div class="header">
+    <div  class="end-align">
+        <button mat-mini-fab color="primary" class="button-add">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+</div>
 <div class="center">
+   
+    
     <div class="content">
         <mat-table #table [dataSource]="dataSource">
             <ng-container matColumnDef="image">
-                <mat-header-cell *matHeaderCellDef> Imagen </mat-header-cell>             
-                <mat-cell  *matCellDef="let item">
+                <mat-header-cell class="cell80-w" *matHeaderCellDef> Imagen </mat-header-cell>             
+                <mat-cell class="cell80-w" *matCellDef="let item">
                     <mat-icon >{{item.image}} </mat-icon>
                 </mat-cell>
               </ng-container>

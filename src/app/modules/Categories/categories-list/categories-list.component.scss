@@ -1,6 +1,19 @@
+.end-align{
+    height: 50px;
+    display: flex;
+    justify-content:flex-end;
+}
+.button-add{
+    margin: 4px;
+}
+.header{
+    background-color: lavender;
+    height: 50px;
+    width: 100%;
+}
 .center {
     margin: auto;
-    width: 100%;
+    width: 90%;
     padding: 10px;
   }
   .button-icon{
@@ -18,4 +31,8 @@
     max-width: 100px;
     min-height: 64px;
     margin-right: 8px;
+}
+.cell80-w {
+    min-width: 80px;
+    max-width: 80px;
 }
