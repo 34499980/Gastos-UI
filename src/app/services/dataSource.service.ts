@@ -27,4 +27,7 @@ import { Category } from "../models/models";
   public getImages(): Observable<Item[]> {   
     return this.httpClient.get<Item[]>(`${this.apiEndpoint}/DataSource/getImages`)
   }
+  public getTypes(): Observable<Item[]> {   
+    return this.httpClient.get<Item[]>(`${this.apiEndpoint}/DataSource/getTypes`)
+  }
   }

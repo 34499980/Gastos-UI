@@ -10,30 +10,22 @@
     
     <div class="content">
         <mat-table #table class="table" [dataSource]="dataSource">
-            <ng-container matColumnDef="image">
-                <mat-header-cell class="cell80-w" *matHeaderCellDef> Imagen </mat-header-cell>             
+            <ng-container matColumnDef="category">
+                <mat-header-cell class="cell80-w" *matHeaderCellDef> Categoria </mat-header-cell>             
                 <mat-cell class="cell80-w" *matCellDef="let item">
                     <mat-icon >{{item.image}} </mat-icon>
                 </mat-cell>
               </ng-container>
         
-            <ng-container matColumnDef="name">
-            <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+            <ng-container matColumnDef="amount">
+            <mat-header-cell *matHeaderCellDef> Monto </mat-header-cell>
             <mat-cell mat-cell *matCellDef="let item"> {{item.name}} </mat-cell>
             </ng-container>
         
-            <ng-container matColumnDef="actions">
-                <mat-header-cell mat-header-cell *matHeaderCellDef> actions </mat-header-cell>
-                <mat-cell mat-cell *matCellDef="let item"> 
-                    <button mat-icon-button class="button-icon" (click)="edit(item)" color="primary">
-                        <mat-icon >edit</mat-icon>
-                  </button>
-                  <button mat-icon-button class="button-icon" (click)="delete(item)" style="color: red;">
-                    <mat-icon >delete</mat-icon>
-              </button>
-                </mat-cell>
+            <ng-container matColumnDef="type">
+                <mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
+                <mat-cell mat-cell *matCellDef="let item"> {{item.name}} </mat-cell>
             </ng-container>
-            
            
         
             <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
