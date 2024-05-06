@@ -9,7 +9,7 @@ import { Category } from "../models/models";
 @Injectable({
     providedIn: 'root'
   })
-  export class CategryService {
+  export class ImageService {
     private apiEndpoint = '';
     headers = new HttpHeaders().append('Content-Disposition', 'multipart/form-data');
 
@@ -21,10 +21,10 @@ import { Category } from "../models/models";
       }
 
     
-  public getAll(): Observable<Category[]> {   
-    return this.httpClient.get<Category[]>(`${this.apiEndpoint}/Category/getAll`)
-  }
-  public edit(input: Category): Observable<any> {   
-    return this.httpClient.put<any>(`${this.apiEndpoint}/Category/edit`, input)
-  }
-  }
+  public add(item: Item): Observable<any> {   
+    return this.httpClient.post<any>(`${this.apiEndpoint}/Image/add`, item)
+    }
+public edit(item: Item): Observable<any> {   
+    return this.httpClient.post<any>(`${this.apiEndpoint}/Image/edit`, item)
+    }
+}

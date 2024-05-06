@@ -1,5 +1,7 @@
-export class Category {
-    id: string;
+export class Category{
+    key: string;
     name: string;
     image: string;
+    imageKey?: string;
+    createdDate: string;
 }

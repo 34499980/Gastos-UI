@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>{{title}}</h2>
+<mat-dialog-content>
+        <ng-container [formGroup]="formGroup">
+                <mat-form-field class="cell">
+                        <mat-label>Imagen</mat-label>
+                        <mat-select formControlName="image" (selectionChange)="onImageChange($event.value)" required>
+                                <mat-select-trigger>                                       
+                                        <mat-icon>{{selectedImage.description}}</mat-icon>
+                                      </mat-select-trigger>
+                                <mat-option *ngFor="let item of list" [value]="item.key">
+                                <mat-icon>{{item.description}}</mat-icon>
+                                </mat-option>
+                        </mat-select>
+                </mat-form-field>
+                <mat-form-field style="height: 76px;">
+                        <mat-label>Nombre
+                        </mat-label>
+                        <input matInput formControlName="name">
+                </mat-form-field>
+        </ng-container>
+</mat-dialog-content>
+<mat-dialog-actions class="end-align">
+ 
+        <button mat-button  (click)="cancel()">Cancelar</button>
+        <button mat-button color="primary" (click)="accept()" [disabled]="formGroup.invalid" cdkFocusInitial>Aceptar</button>
+  
+  
+</mat-dialog-actions>

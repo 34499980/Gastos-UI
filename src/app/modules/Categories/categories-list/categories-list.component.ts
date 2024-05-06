@@ -10,6 +10,11 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { DialogConfirm } from '../../../dialogs/confirm/dialog-confirm';
+import { DataSourceService } from '../../../services/dataSource.service';
+import { Item } from '../../../models/item.model';
+import { DialogSelect } from '../../../dialogs/dialog-select-with-image/dialog-select';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { tap, filter, switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-categories-list',
@@ -20,18 +25,32 @@ import { DialogConfirm } from '../../../dialogs/confirm/dialog-confirm';
 })
 export default class CategoriesListComponent implements OnInit {
   categoryService = inject(CategryService);
+  dataSourceService = inject(DataSourceService);
   public dialogService = inject(MatDialog);
+  dataTable$: Subject<Category[]> = new Subject();
   list: Category[];
+  images: Item[];
   dataSource = new MatTableDataSource<Category>();
   displayedColumns: string[] = ['image', 'name', 'actions'];
 
   ngOnInit(): void {
-    console.log('Entra')
-    this.categoryService.getAll().subscribe({
+    this.getCagetories();
+    this.loadData();
+    this.dataSourceService.getImages().subscribe({
       next: res => {
-        this.dataSource.data = res;
+        this.images = res;
       } 
     })
+  }
+  getCagetories(){
+    this.dataTable$.pipe(
+      switchMap(() =>{ return  this.categoryService.getAll()})
+    ).subscribe(res  =>  {
+      this.dataSource.data = res;
+    })
+  }
+  loadData(){
+    this.dataTable$.next([]);
   }
   delete(row: Category){
     const dialogRef = this.dialogService.open(DialogConfirm, {
@@ -42,9 +61,36 @@ export default class CategoriesListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
      if(result){
-
+      this.loadData();
      }
     });
   }
-  
+  edit(row: Category){
+    const dialogRef = this.dialogService.open(DialogSelect, {
+      data: {list: this.images,
+             imageSelected: row.image,
+             name: row.name,
+             title: 'Editar categoria'
+            },
+      
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+     if(result){
+      const input: Category ={
+        key: row.key,
+        image: result.image,
+        name: result.name,
+        createdDate: row.createdDate
+        
+      }
+      this.categoryService.edit(input).subscribe({
+        next: res => {
+          this.loadData()
+        } 
+      })
+     }
+    });
+  }
 }
