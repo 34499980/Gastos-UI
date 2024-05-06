@@ -1,4 +1,39 @@
-
-<div style="margin-left: 220px;" *ngFor="let item of list">
-    {{item.name}}
+<div class="center">
+    <div class="content">
+        <mat-table #table [dataSource]="dataSource">
+            <ng-container matColumnDef="image">
+                <mat-header-cell *matHeaderCellDef> Imagen </mat-header-cell>             
+                <mat-cell  *matCellDef="let item">
+                    <mat-icon >{{item.image}} </mat-icon>
+                </mat-cell>
+              </ng-container>
+        
+            <ng-container matColumnDef="name">
+            <mat-header-cell *matHeaderCellDef> Nombre </mat-header-cell>
+            <mat-cell mat-cell *matCellDef="let item"> {{item.name}} </mat-cell>
+            </ng-container>
+        
+            <ng-container matColumnDef="actions">
+                <mat-header-cell mat-header-cell *matHeaderCellDef> actions </mat-header-cell>
+                <mat-cell mat-cell *matCellDef="let item"> 
+                    <button mat-icon-button class="button-icon" color="primary">
+                        <mat-icon >edit</mat-icon>
+                  </button>
+                  <button mat-icon-button class="button-icon" style="color: red;">
+                    <mat-icon >delete</mat-icon>
+              </button>
+                </mat-cell>
+            </ng-container>
+            
+           
+        
+            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+            <mat-row *matRowDef="let item; columns: displayedColumns;"
+            [class.user-pointer]="false" matRipple>
+            </mat-row>
+        
+        
+        
+         </mat-table>
+    </div>
 </div>

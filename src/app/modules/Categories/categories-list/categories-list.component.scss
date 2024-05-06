@@ -1,0 +1,21 @@
+.center {
+    margin: auto;
+    width: 100%;
+    padding: 10px;
+  }
+  .button-icon{
+    padding: 0%;
+    height: 20px;
+    span{
+        height: 20px;
+    }
+    mat-mdc-button-touch-target{
+        height: 20px; 
+    }
+  }
+  .mat-header-cell, .mat-cell {
+    min-width: 100px;
+    max-width: 100px;
+    min-height: 64px;
+    margin-right: 8px;
+}
