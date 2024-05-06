@@ -27,4 +27,10 @@ import { Category } from "../models/models";
   public edit(input: Category): Observable<any> {   
     return this.httpClient.put<any>(`${this.apiEndpoint}/Category/edit`, input)
   }
+  public add(input: Category): Observable<any> {   
+    return this.httpClient.post<any>(`${this.apiEndpoint}/Category/add`, input)
+  }
+  public delete(input: string): Observable<any> {   
+    return this.httpClient.delete<any>(`${this.apiEndpoint}/Category/remove/${input}`)
+  }
   }

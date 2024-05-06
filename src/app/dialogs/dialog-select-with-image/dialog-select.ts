@@ -57,9 +57,15 @@ export interface DialogData {
     ) {
         this.list = data.list;
         this.title = data.title;
-        this.selectedImage = this.list.find(x => x.description == data.imageSelected) as Item;
-        this.formGroup.controls.image.setValue(this.selectedImage.key);
-        this.formGroup.controls.name.setValue(data.name);
+        if(data.imageSelected != ""){
+          this.selectedImage = this.list.find(x => x.description == data.imageSelected) as Item;
+          this.formGroup.controls.image.setValue(this.selectedImage.key);
+          this.formGroup.controls.name.setValue(data.name);
+        } else {
+          this.selectedImage = this.list[0] as Item;
+          this.formGroup.controls.image.setValue(this.selectedImage.key);
+        }
+       
     }
     onImageChange(value: string){
       this.formGroup.controls.image.setValue(value);

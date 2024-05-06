@@ -61,7 +61,11 @@ export default class CategoriesListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
      if(result){
-      this.loadData();
+      this.categoryService.delete(row.key).subscribe({
+        next: res => {
+          this.loadData()
+        } 
+      })      
      }
     });
   }
@@ -86,6 +90,35 @@ export default class CategoriesListComponent implements OnInit {
         
       }
       this.categoryService.edit(input).subscribe({
+        next: res => {
+          this.loadData()
+        } 
+      })
+     }
+    });
+  }
+  add(){
+    const dialogRef = this.dialogService.open(DialogSelect, {
+      data: {list: this.images,
+             imageSelected: '',
+             name: '',
+             title: 'Crear categoria'
+            },
+      
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+     if(result){
+      const date = new Date();
+      const input: Category ={
+        key: '',
+        image: result.image,
+        name: result.name,
+        createdDate: ''
+        
+      }
+      this.categoryService.add(input).subscribe({
         next: res => {
           this.loadData()
         } 
