@@ -47,6 +47,11 @@
                     <td> {{item.description}} </td>
                     <td> {{item.amount | currency}}</td>
                     <td>{{item.createdDate}}</td>  
+                    <td>
+                        
+                        <mat-icon style="color: red;" (click)="delete(item.key)">delete</mat-icon>
+                       
+                    </td> 
                  </tr>      
               </table>
           

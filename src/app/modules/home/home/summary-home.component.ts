@@ -134,4 +134,11 @@ export default class SummaryHomeComponent {
      }
     });
   }
+  delete(key: string){
+    this.movementService.delete(key).subscribe({
+      next: res => {
+        this.loadData()
+      } 
+    })
+  }
 }
