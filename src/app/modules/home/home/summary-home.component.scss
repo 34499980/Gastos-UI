@@ -1,7 +1,37 @@
 table {
     width: 100%;
   }
-  
+  .tableDetail {
+    border-collapse: collapse;
+    tr, td{
+        border: 1px solid;
+    }
+   
+  }
+  .end-align{
+    height: 50px;
+    display: flex;
+    justify-content:flex-end;
+}
+.center {
+    margin: auto;
+    width: 90%;
+    padding: 10px;
+  }
+  .grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+
+    .grid-item {
+        border: 1px solid rgba(0, 0, 0, 0.8);
+        text-align: center;
+      } 
+  }
+  .header{
+    background-color: lavender;
+    height: 50px;
+    width: 100%;
+}
   tr.example-detail-row {
     height: 0;
   }
@@ -25,24 +55,24 @@ table {
   
   .example-element-diagram {
     min-width: 80px;
-    border: 2px solid black;
     padding: 8px;
-    font-weight: lighter;
     margin: 8px 0;
     height: 104px;
   }
   
   .example-element-symbol {
-    font-weight: bold;
-    font-size: 40px;
     line-height: normal;
   }
   
   .example-element-description {
     padding: 16px;
+    width: 90%;
   }
   
   .example-element-description-attribution {
     opacity: 0.5;
+  }
+  .itemWidth{
+    width: 100px;
   }
   
