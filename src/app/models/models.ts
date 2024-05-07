@@ -21,9 +21,10 @@ export interface Movement{
     due?: Due;
 }
 export interface SummaryHome {
-    category: string;
-    amount: number;
-    type: string;
+    Categoria: string;
+    Monto: number;
+    Tipo: string;
+    movement?: Movement[];
 }
 export interface Due{
     key: string;

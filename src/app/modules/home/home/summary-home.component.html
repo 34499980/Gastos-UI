@@ -1,40 +1,38 @@
-<div class="header">
-    <div  class="end-align">
-        <button mat-mini-fab (click)="add()" color="primary" class="button-add">
-            <mat-icon>add</mat-icon>
-        </button>
-    </div>
-</div>
-<div class="center">
-   
-    
-    <div class="content">
-        <mat-table #table class="table" [dataSource]="dataSource">
-            <ng-container matColumnDef="category">
-                <mat-header-cell  *matHeaderCellDef> Categoria </mat-header-cell>             
-                <mat-cell *matCellDef="let item">
-                    {{item.category}} 
-                </mat-cell>
-              </ng-container>
+<table mat-table
+       [dataSource]="dataSource" multiTemplateDataRows
+       class="mat-elevation-z8">
+  <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+    <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+    <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+  </ng-container>
+
+  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+  <ng-container matColumnDef="expandedDetail">
+    <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+      <div class="example-element-detail"
+           [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
         
-            <ng-container matColumnDef="amount">
-            <mat-header-cell *matHeaderCellDef> Monto </mat-header-cell>
-            <mat-cell mat-cell *matCellDef="let item"> {{item.amount}} </mat-cell>
-            </ng-container>
-        
-            <ng-container matColumnDef="type">
-                <mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
-                <mat-cell mat-cell *matCellDef="let item"> {{item.type}} </mat-cell>
-            </ng-container>
-           
-        
-            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
-            <mat-row *matRowDef="let item; columns: displayedColumns;"
-            [class.user-pointer]="false" matRipple>
-            </mat-row>
-        
-        
-        
-         </mat-table>
-    </div>
-</div>
+        <div class="example-element-description">
+            <div *ngFor="let item of element.movement">
+                <span>{{item.description}}</span>  <span>{{item.amount}}</span> <span>{{item.createdDate}}</span>
+            </div>
+         
+          <span class="example-element-description-attribution"> -- Wikipedia </span>
+        </div>
+      </div>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+      class="example-element-row"
+      [class.example-expanded-row]="expandedElement === element"
+      (click)="expandedElement = expandedElement === element ? null : element">
+  </tr>
+  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+</table>
+
+
+<!-- Copyright 2019 Google LLC. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license -->
