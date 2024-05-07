@@ -28,10 +28,10 @@ import { Category, Movement } from "../models/models";
 
     return this.httpClient.get<Movement[]>(`${this.apiEndpoint}/Movement/getByMonth`,{params})
   }
-  public edit(input: Category): Observable<any> {   
+  public edit(input: Movement): Observable<any> {   
     return this.httpClient.put<any>(`${this.apiEndpoint}/Movement/edit`, input)
   }
-  public add(input: Category): Observable<any> {   
+  public add(input: Movement): Observable<any> {   
     return this.httpClient.post<any>(`${this.apiEndpoint}/Movement/add`, input)
   }
   public delete(input: string): Observable<any> {   

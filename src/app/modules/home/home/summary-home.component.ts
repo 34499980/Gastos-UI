@@ -14,9 +14,9 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MovementService } from '../../../services/movement.service';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
-/**
- * @title Table with expandable rows
- */
+import { DialogMovement } from '../../../dialogs/dialog-movement/dialog-movement';
+
+
 @Component({
   selector: 'summary-home',
   styleUrls: ['summary-home.component.scss'],
@@ -30,13 +30,15 @@ import {MatListModule} from '@angular/material/list';
     ]),
   ],
   imports: [
-    CommonModule ,MatTableModule, MatButtonModule, MatIconModule, NgFor,MatDividerModule, MatListModule
+    CommonModule, MatDialogModule ,MatTableModule, MatButtonModule, MatIconModule, NgFor,MatDividerModule, MatListModule
   ]
 })
 export default class SummaryHomeComponent {
   movementService = inject(MovementService);
   dataSourceService = inject(DataSourceService);
   route = inject(ActivatedRoute);
+  public dialogService = inject(MatDialog);
+
   dataTable$: Subject<Movement[]> = new Subject();
   date = new Date();
   newItem: SummaryHome;
@@ -58,7 +60,7 @@ export default class SummaryHomeComponent {
   }
   getMovements(){
     this.dataTable$.pipe(
-      switchMap(() =>{ return  this.movementService.getByMonth(7,2023/*this.date.getMonth(), this.date.getFullYear()*/)})
+      switchMap(() =>{ return  this.movementService.getByMonth(this.date.getMonth(), this.date.getFullYear())})
     ).subscribe(res  =>  {
       const listResp = res.sort((a,b) => a.categoryKey.localeCompare(b.categoryKey));
       let category = '';
@@ -91,9 +93,45 @@ export default class SummaryHomeComponent {
     return newItem;
   }
   loadData(){
+    this.list = [];
+    this.dataSource.data = [];
     this.dataTable$.next([]);
   }
   add(){
+    const dialogRef = this.dialogService.open(DialogMovement, {
+      data: {list: this.listCategories,
+             title: "Ingresar movimiento",
+            listType : this.listTypes},
+      
+      disableClose: true
+    });
 
+    dialogRef.afterClosed().subscribe(result => {
+     if(result){
+      const date = new Date();
+      const input: Movement = {
+        amount: result.amount,
+        categoryKey: result.category,
+        createdDate: '',
+        createdBy: 'system',
+        description: result.description,
+        dueBool: result.due > 0? true: false,
+        dueKey: '',
+        key: '',
+        modifiedDate: '',
+        typeKey: result.type,
+        due: result.due,
+        month: date.getMonth(),
+        year: date.getFullYear()
+
+
+      }
+      this.movementService.add(input).subscribe({
+        next: res => {
+          this.loadData()
+        } 
+      })
+     }
+    });
   }
 }
