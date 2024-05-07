@@ -9,7 +9,7 @@ export interface Movement{
     key: string;
     description: string;
     amount: number;
-    typeKey: number;
+    typeKey: string;
     categoryKey: string;
     month: number;
     year: number;

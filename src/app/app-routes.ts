@@ -10,6 +10,12 @@ export const appRoutes: Route[] = [
     path: AppRoutePaths.CATEGORY,
     loadChildren: ()=> import('../app/modules/Categories/category.routes')
   
+  },
+  {
+    
+    path: '',
+    loadChildren: ()=> import('../app/modules/home/home.routes')
+  
   }
 ];
 

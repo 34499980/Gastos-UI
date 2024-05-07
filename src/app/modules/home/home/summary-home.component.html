@@ -11,20 +11,20 @@
     <div class="content">
         <mat-table #table class="table" [dataSource]="dataSource">
             <ng-container matColumnDef="category">
-                <mat-header-cell class="cell80-w" *matHeaderCellDef> Categoria </mat-header-cell>             
-                <mat-cell class="cell80-w" *matCellDef="let item">
-                    <mat-icon >{{item.image}} </mat-icon>
+                <mat-header-cell  *matHeaderCellDef> Categoria </mat-header-cell>             
+                <mat-cell *matCellDef="let item">
+                    {{item.category}} 
                 </mat-cell>
               </ng-container>
         
             <ng-container matColumnDef="amount">
             <mat-header-cell *matHeaderCellDef> Monto </mat-header-cell>
-            <mat-cell mat-cell *matCellDef="let item"> {{item.name}} </mat-cell>
+            <mat-cell mat-cell *matCellDef="let item"> {{item.amount}} </mat-cell>
             </ng-container>
         
             <ng-container matColumnDef="type">
                 <mat-header-cell *matHeaderCellDef> Tipo </mat-header-cell>
-                <mat-cell mat-cell *matCellDef="let item"> {{item.name}} </mat-cell>
+                <mat-cell mat-cell *matCellDef="let item"> {{item.type}} </mat-cell>
             </ng-container>
            
         

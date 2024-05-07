@@ -22,9 +22,10 @@ import { Category, Movement } from "../models/models";
 
     
   public getByMonth(month: number, year: number): Observable<Movement[]> {   
-    const params = new HttpParams();
-    params.append('month', month)
-    params.append('year', year)
+    const params = new HttpParams().set('month', month)
+                                   .set('year', year);
+    const urlWithParams = `${this.apiEndpoint}?${params.toString()}`;
+
     return this.httpClient.get<Movement[]>(`${this.apiEndpoint}/Movement/getByMonth`,{params})
   }
   public edit(input: Category): Observable<any> {   
