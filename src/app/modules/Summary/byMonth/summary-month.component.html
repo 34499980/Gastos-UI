@@ -17,6 +17,11 @@
         <button mat-button color="primary" style="margin-bottom: 10px;" (click)="search()" [disabled]="formGroup.invalid">
             <mat-icon>search</mat-icon>
         </button>
+        <mat-form-field  class="cellYear">
+            <mat-label>Categoria
+            </mat-label>
+            <input matInput formControlName="category"  />
+        </mat-form-field>
 
         </div>
        
@@ -30,7 +35,7 @@
             <ng-container matColumnDef="category">
                 <mat-header-cell class="cellCategory" *matHeaderCellDef> Categoria </mat-header-cell>             
                 <mat-cell (click)="edit(item)" class="cellCategory" *matCellDef="let item">
-                     <mat-icon>{{item.category}} </mat-icon>
+                     <mat-icon>{{item.image}} </mat-icon>
                 </mat-cell>
               </ng-container>
         

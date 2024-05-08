@@ -55,12 +55,13 @@ export default class SummaryByMonthComponent implements OnInit {
   listTypes: Item[];
   date = new Date();
   list: SummaryByMonth[] = [];
+  listFilter: SummaryByMonth[] = [];
   listMovement: Movement[] = [];
   dataSource = new MatTableDataSource<SummaryByMonth>();
   formGroup = new FormBuilder().group({
     month: ['', Validators.required],
-    year:  ['', Validators.required]
-
+    year:  ['', Validators.required],
+    category: ['']
   });
    months = ['1','2','3','4','5','6','7','8','9','10','11','12'
    
@@ -74,12 +75,25 @@ export default class SummaryByMonthComponent implements OnInit {
     this.listTypes = this.route.snapshot.data['types'];
     this.getSummary();
     this.loadData();
+    this.formGroup.controls.category.valueChanges.subscribe(val => {
+      if(val == '' || val == undefined || val == null){
+        this.dataSource.data = this.list;
+      } else {
+        const value = val as string;
+        const listFiler = this.list.filter(x => x.category.toLowerCase().includes(value.toLowerCase()));
+        this.dataSource.data = listFiler;
+      }
+    
+    });
    
   }
   search(){
     if(!this.formGroup.invalid){
       this.loadData();
     }
+  }
+  generateDto(list: SummaryByMonth[]){
+
   }
   getSummary(){
     this.dataTable$.pipe(
@@ -95,7 +109,8 @@ export default class SummaryByMonthComponent implements OnInit {
         const newItem: SummaryByMonth = {
           key : element.key,
           amount: element.amount,
-          category: this.listCategories.find(x => x.key == element.categoryKey)?.image as string,
+          category: this.listCategories.find(x => x.key == element.categoryKey)?.description as string,
+          image: this.listCategories.find(x => x.key == element.categoryKey)?.image as string,
           date: element.createdDate,
           description: element.description,
           type: this.listTypes.find(x => x.key == element.typeKey)?.description as string,

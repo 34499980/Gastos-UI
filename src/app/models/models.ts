@@ -29,6 +29,7 @@ export interface SummaryHome {
 export interface SummaryByMonth{
     key: string;
     category: string;
+    image: string;
     amount: number;
     type: string;
     description: string;
