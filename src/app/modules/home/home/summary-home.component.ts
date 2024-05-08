@@ -103,7 +103,7 @@ export default class SummaryHomeComponent {
   createDue(amount: number, due: number): Due{
     const newDue: Due = {
       totalAmount: amount,
-      countDues: due
+      countDues: due.toString()
       }
       return newDue;
   }

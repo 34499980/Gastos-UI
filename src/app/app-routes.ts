@@ -23,6 +23,12 @@ export const appRoutes: Route[] = [
     path: AppRoutePaths.SUMMARY,
     loadChildren: ()=> import('../app/modules/summary/summary.routes')
   
+  },
+  {
+    
+    path: AppRoutePaths.FEE,
+    loadChildren: ()=> import('../app/modules/fee/fee.routes')
+  
   }
 ];
 
