@@ -7,67 +7,72 @@
 </div>
 <div class="center">
     <div class="content">
-
+        <div>
+            <span style="margin-bottom: 2px;"><b>Ingreso: </b></span><span>{{salary | currency}}</span><br>
+            <span style="margin-bottom: 2px;"><b>Compra: </b></span><span style="color: red;">{{buys | currency}}</span><br>
+            <span style="margin-bottom: 2px;"><b>Saldo: </b></span><span [ngStyle]="{'color': restValidation() ? 'red' : 'green'}">{{this.salary - this.buys | currency}}</span><br>
+        </div>
+        <table mat-table
+        [dataSource]="dataSource" multiTemplateDataRows
+       >
+   <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+     <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+     <div *ngIf="column == 'Monto'; else elseBlock">
+         <td mat-cell *matCellDef="let element"> {{element[column] | currency }} </td>
+     </div>
+     <ng-template #elseBlock>
+         <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+     </ng-template>
+    
+   </ng-container>
+ 
+   <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+   <ng-container matColumnDef="expandedDetail">
+     <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
+       <div class="example-element-detail"
+            [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+         
+         <div class="example-element-description">
+             <!--<div class="grid-container" *ngFor="let item of element.movement">
+                 <div class="grid-item"> {{item.description}} </div>
+                 <div class="grid-item"> {{item.amount | currency}}</div>
+                 <div class="grid-item">{{item.createdDate}}</div>  
+              </div>-->
+              <table class="tableDetail">
+                 <tr>
+                   <th>Descripción</th>
+                   <th>Monto</th>
+                   <th>Fecha</th>
+                 </tr>
+                 <tr  *ngFor="let item of element.movement">
+                     <td> {{item.description}} </td>
+                     <td> {{item.amount | currency}}</td>
+                     <td>{{item.createdDate}}</td>  
+                     <td>
+                         
+                         <mat-icon style="color: red;" (click)="delete(item.key)">delete</mat-icon>
+                        
+                     </td> 
+                  </tr>      
+               </table>
+           
+         </div>
+       </div>
+     </td>
+   </ng-container>
+ 
+   <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+   <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+       class="example-element-row"
+       [class.example-expanded-row]="expandedElement === element"
+       (click)="expandedElement = expandedElement === element ? null : element">
+   </tr>
+   <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+ </table>
+ 
     </div>
 
 </div>
-<table mat-table
-       [dataSource]="dataSource" multiTemplateDataRows
-      >
-  <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
-    <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-    <div *ngIf="column == 'Monto'; else elseBlock">
-        <td mat-cell *matCellDef="let element"> {{element[column] | currency }} </td>
-    </div>
-    <ng-template #elseBlock>
-        <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
-    </ng-template>
-   
-  </ng-container>
-
-  <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-  <ng-container matColumnDef="expandedDetail">
-    <td mat-cell *matCellDef="let element" [attr.colspan]="columnsToDisplay.length">
-      <div class="example-element-detail"
-           [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-        
-        <div class="example-element-description">
-            <!--<div class="grid-container" *ngFor="let item of element.movement">
-                <div class="grid-item"> {{item.description}} </div>
-                <div class="grid-item"> {{item.amount | currency}}</div>
-                <div class="grid-item">{{item.createdDate}}</div>  
-             </div>-->
-             <table class="tableDetail">
-                <tr>
-                  <th>Descripción</th>
-                  <th>Monto</th>
-                  <th>Fecha</th>
-                </tr>
-                <tr  *ngFor="let item of element.movement">
-                    <td> {{item.description}} </td>
-                    <td> {{item.amount | currency}}</td>
-                    <td>{{item.createdDate}}</td>  
-                    <td>
-                        
-                        <mat-icon style="color: red;" (click)="delete(item.key)">delete</mat-icon>
-                       
-                    </td> 
-                 </tr>      
-              </table>
-          
-        </div>
-      </div>
-    </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-  <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
-      class="example-element-row"
-      [class.example-expanded-row]="expandedElement === element"
-      (click)="expandedElement = expandedElement === element ? null : element">
-  </tr>
-  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-</table>
 
 
 <!-- Copyright 2019 Google LLC. All Rights Reserved.
