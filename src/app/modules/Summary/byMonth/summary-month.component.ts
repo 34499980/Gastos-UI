@@ -114,6 +114,7 @@ export default class SummaryByMonthComponent implements OnInit {
           date: element.createdDate,
           description: element.description,
           type: this.listTypes.find(x => x.key == element.typeKey)?.description as string,
+          due: element.due
         }
         this.list.push(newItem);
       });

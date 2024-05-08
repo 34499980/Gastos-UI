@@ -82,7 +82,7 @@ export interface DialogData {
           this.formGroup.controls.description.setValue(this.movement.description);
           this.formGroup.controls.amount.setValue(this.movement.amount.toString());
           this.formGroup.controls.type.setValue(this.movement.typeKey);
-          if(this.movement.dueBool){
+          if(this.movement.dueKey != ''){
             const dueValue = this.movement.due?.countDues.toString() as string;
             this.formGroup.controls.due.setValue(dueValue);
           }
