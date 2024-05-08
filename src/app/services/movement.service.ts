@@ -37,4 +37,9 @@ import { Category, Movement } from "../models/models";
   public delete(input: string): Observable<any> {   
     return this.httpClient.delete<any>(`${this.apiEndpoint}/Movement/remove/${input}`)
   }
+  public getAll(): Observable<Movement[]> {     
+   
+
+    return this.httpClient.get<Movement[]>(`${this.apiEndpoint}/Total/getAll`)
+  }
   }

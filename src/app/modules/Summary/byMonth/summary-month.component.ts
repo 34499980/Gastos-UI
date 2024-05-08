@@ -65,7 +65,7 @@ export default class SummaryByMonthComponent implements OnInit {
    months = ['1','2','3','4','5','6','7','8','9','10','11','12'
    
   ]
-  displayedColumns: string[] = ['category', 'description', 'type', 'amount', 'date', 'actions'];
+  displayedColumns: string[] = ['category', 'description', 'type', 'amount', 'date'];
 
   ngOnInit(): void {
     this.formGroup.controls.month.setValue(this.date.getMonth().toString());
