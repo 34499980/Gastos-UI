@@ -73,30 +73,31 @@ export default class SummaryHomeComponent {
         return  this.movementService.getByMonth(month, year)
       })
     ).subscribe(res  =>  {
-      const listResp = res.sort((a,b) => b.categoryKey.localeCompare(a.categoryKey));
+     
       let category = '';
       let index = 0;
-      const end = listResp.length;
+      const end = res.length;
       while(index < end){
         let movementList: Movement[] = [];
-        if(category != listResp[index].categoryKey){
-          this.newItem = this.createNewItem(listResp[index], category)
-          category = listResp[index].categoryKey;
+        if(category != res[index].categoryKey){
+          this.newItem = this.createNewItem(res[index], category)
+          category = res[index].categoryKey;
         }
-        while(index < end && category == listResp[index].categoryKey){
-          this.newItem.Monto += listResp[index].amount;
-          movementList.push(listResp[index])
-          if(Types.INPUT == listResp[index].typeKey){
-            this.salary += listResp[index].amount;
+        while(index < end && category == res[index].categoryKey){
+          this.newItem.Monto += res[index].amount;
+          movementList.push(res[index])
+          if(Types.INPUT == res[index].typeKey){
+            this.salary += res[index].amount;
           } else {
-            this.buys += listResp[index].amount;
+            this.buys += res[index].amount;
           }
           index++;
         }
         this.newItem.movement = movementList;
         this.list.push(this.newItem);
       }    
-      this.dataSource.data = this.list;
+      const listResp = this.list.sort((a,b) => b.Tipo.localeCompare(a.Tipo));
+      this.dataSource.data = listResp;
     })
   }
   createDue(amount: number, due: number): Due{

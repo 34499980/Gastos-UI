@@ -4,7 +4,7 @@ import { Item } from "../models/item.model";
 import { ConfigsLoaderService } from "./config-loader.service";
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from "@angular/core";
-import { Category, Movement } from "../models/models";
+import { Category, Movement, SummaryByYear } from "../models/models";
 
 @Injectable({
     providedIn: 'root'
@@ -37,9 +37,7 @@ import { Category, Movement } from "../models/models";
   public delete(input: string): Observable<any> {   
     return this.httpClient.delete<any>(`${this.apiEndpoint}/Movement/remove/${input}`)
   }
-  public getAll(): Observable<Movement[]> {     
-   
-
-    return this.httpClient.get<Movement[]>(`${this.apiEndpoint}/Total/getAll`)
+  public getAllTotals(): Observable<SummaryByYear[]> {   
+      return this.httpClient.get<SummaryByYear[]>(`${this.apiEndpoint}/Totals/getAll`)
   }
   }

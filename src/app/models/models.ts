@@ -35,6 +35,14 @@ export interface SummaryByMonth{
     description: string;
     date: string;
 }
+export interface SummaryByYear{
+    input: number;
+    buy: number;
+    balance: number;
+    date: string;
+    month: number;
+    year: number;
+}
 export interface Due{
     key?: string;
     amount?: number;

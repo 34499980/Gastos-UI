@@ -3,6 +3,7 @@ import { AppRoutePaths } from "../../enums/path.enums";
 import { CategoriesResolver } from "../../resolver/categories.resolver";
 import { TypesResolver } from "../../resolver/types.resolver";
 import SummaryByMonthComponent from "./byMonth/summary-month.component";
+import SummaryByYearComponent from "./byYear/summary-year.component";
 
 const summaryRoutes: Route[] = [
     {
@@ -12,7 +13,12 @@ const summaryRoutes: Route[] = [
             types: TypesResolver,
             categories: CategoriesResolver
         }
-        //loadComponent: ()=> import('app/modules/Categories/categories-list/categories-list.component'),
+      
+    },
+    {
+        path: `${AppRoutePaths.BYYEAR}`,     
+        component: SummaryByYearComponent,
+        
       
     }
 ];
