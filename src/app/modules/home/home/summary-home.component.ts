@@ -67,7 +67,11 @@ export default class SummaryHomeComponent {
   }
   getMovements(){
     this.dataTable$.pipe(
-      switchMap(() =>{ return  this.movementService.getByMonth(this.date.getMonth(), this.date.getFullYear())})
+      switchMap(() =>{ 
+        const month = this.date.getMonth().toString();
+        const year =  this.date.getFullYear().toString();
+        return  this.movementService.getByMonth(month, year)
+      })
     ).subscribe(res  =>  {
       const listResp = res.sort((a,b) => b.categoryKey.localeCompare(a.categoryKey));
       let category = '';

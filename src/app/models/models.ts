@@ -26,6 +26,14 @@ export interface SummaryHome {
     Tipo: string;
     movement?: Movement[];
 }
+export interface SummaryByMonth{
+    key: string;
+    category: string;
+    amount: number;
+    type: string;
+    description: string;
+    date: string;
+}
 export interface Due{
     key?: string;
     amount?: number;

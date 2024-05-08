@@ -1,0 +1,78 @@
+<div class="header">
+    <ng-container [formGroup]="formGroup"> 
+        <div>
+            <mat-form-field class="cellMonth">
+                <mat-label>Mes</mat-label>
+                <mat-select formControlName="month" required>                               
+                        <mat-option *ngFor="let item of months" [value]="item">
+                        <span>{{item}}</span>
+                        </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field  class="cellYear">
+                <mat-label>Año
+                </mat-label>
+                <input matInput formControlName="year"  />
+        </mat-form-field>
+        <button mat-button color="primary" style="margin-bottom: 10px;" (click)="search()" [disabled]="formGroup.invalid">
+            <mat-icon>search</mat-icon>
+        </button>
+
+        </div>
+       
+    </ng-container>
+</div>
+<div class="center">
+   
+    
+    <div class="content">
+        <mat-table #table class="table" [dataSource]="dataSource">
+            <ng-container matColumnDef="category">
+                <mat-header-cell class="cellCategory" *matHeaderCellDef> Categoria </mat-header-cell>             
+                <mat-cell (click)="edit(item)" class="cellCategory" *matCellDef="let item">
+                     <mat-icon>{{item.category}} </mat-icon>
+                </mat-cell>
+              </ng-container>
+        
+            <ng-container matColumnDef="description">
+            <mat-header-cell class="cellDescription" *matHeaderCellDef> Descripción </mat-header-cell>
+            <mat-cell (click)="edit(item)" mat-cell class="cellDescription" *matCellDef="let item"> {{item.description}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="type">
+                <mat-header-cell class="cellType" *matHeaderCellDef> Tipo </mat-header-cell>
+                <mat-cell (click)="edit(item)" mat-cell class="cellType" *matCellDef="let item"> {{item.type}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="amount">
+                <mat-header-cell class="cellAmount" *matHeaderCellDef> Monto </mat-header-cell>
+                <mat-cell (click)="edit(item)" mat-cell class="cellAmount" *matCellDef="let item"> {{item.amount | currency}} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="date">
+                <mat-header-cell  class="cellDate" *matHeaderCellDef> Fecha </mat-header-cell>
+                <mat-cell (click)="edit(item)" mat-cell class="cellDate" *matCellDef="let item"> {{item.date | date: 'dd/MM/yyyy'}} </mat-cell>
+            </ng-container>
+        
+            <ng-container matColumnDef="actions">
+                <mat-header-cell class="cell-w" mat-header-cell *matHeaderCellDef> actions </mat-header-cell>
+                <mat-cell (click)="edit(item)" mat-cell  class="cell-w"  *matCellDef="let item"> 
+                   
+                    <mat-icon color="primary" (click)="edit(item)" >edit</mat-icon>
+                    <mat-icon (click)="delete(item)" style="color: red;">delete</mat-icon>
+             
+                </mat-cell>
+            </ng-container>
+            
+           
+        
+            <mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></mat-header-row>
+            <mat-row *matRowDef="let item; columns: displayedColumns;"
+            [class.user-pointer]="false" matRipple>
+            </mat-row>
+        
+        
+        
+         </mat-table>
+    </div>
+</div>

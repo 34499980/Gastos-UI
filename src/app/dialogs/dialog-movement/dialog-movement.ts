@@ -18,6 +18,9 @@ import { Item } from '../../models/item.model';
 import { MatRippleModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
 import { MatIconModule } from '@angular/material/icon';
+import { Movement } from '../../models/models';
+import { MovementService } from '../../services/movement.service';
+import { DialogConfirm } from '../confirm/dialog-confirm';
 export interface DialogData {
     list: Item[];
     listType: Item[];
@@ -25,6 +28,8 @@ export interface DialogData {
     amout: number;
     due: number;
     title: string;
+    movement?: Movement;
+    editable: boolean;
   }
   
 @Component({
@@ -46,16 +51,21 @@ export interface DialogData {
         MatIconModule, ]
   })
   export class DialogMovement {
+    public dialogService = inject(MatDialog);
+    public movementService = inject(MovementService);
     list: Item[]; 
     listType: Item[]; 
     title: string;
     selectedImage: Item;
+    movement: Movement;
+    editable: boolean = false;
     formGroup = new FormBuilder().group({
     category: ['', Validators.required],
     description: ['', Validators.required],
     amount: ['', Validators.required],
     type: ['', Validators.required],
     due: ['']
+   
 
   });
     public dialogRef = inject(MatDialogRef<DialogData>);
@@ -64,10 +74,36 @@ export interface DialogData {
     ) {
         this.list = data.list;
         this.listType = data.listType;
-        this.title = data.title;       
+        this.title = data.title; 
+        this.editable = data.editable;   
+        if(data.movement){
+          this.movement = data.movement;
+          this.formGroup.controls.category.setValue(this.movement.categoryKey);
+          this.formGroup.controls.description.setValue(this.movement.description);
+          this.formGroup.controls.amount.setValue(this.movement.amount.toString());
+          this.formGroup.controls.type.setValue(this.movement.typeKey);
+          if(this.movement.dueBool){
+            const dueValue = this.movement.due?.countDues.toString() as string;
+            this.formGroup.controls.due.setValue(dueValue);
+          }
+        }   
        
     }
-   
+   delete(){
+    const dialogRef = this.dialogService.open(DialogConfirm, {
+      data: {name:'', object: "movimiento"},
+      
+      disableClose: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+     if(result){
+      this.movementService.delete(this.movement.key).subscribe(() =>  this.dialogRef.close('delete'));
+     
+           
+     }
+    });
+   }
     cancel(): void {
       this.dialogRef.close(false);
     }

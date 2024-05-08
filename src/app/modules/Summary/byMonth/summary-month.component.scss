@@ -1,0 +1,85 @@
+.end-align{
+  height: 50px;
+  display: flex;
+  justify-content:flex-end;
+}
+.table{
+  z-index: -11;
+}
+.button-add{
+  margin: 4px;
+}
+.header{
+  background-color: lavender;
+  height: 50px;
+  width: 100%;
+}
+.center {
+  margin: auto;
+  width: 90%;
+  padding: 10px;
+}
+.button-icon{
+  padding: 0%;
+  height: 20px;
+  span{
+      height: 20px;
+  }
+  mat-mdc-button-touch-target{
+      height: 20px; 
+  }
+}
+mat-cell{
+  font-size: x-small;
+}
+mat-header-cell{
+  font-size: small; 
+  
+}
+.mat-header-cell, .mat-cell {
+  min-width: 100px;
+  max-width: 100px;
+  min-height: 64px;
+  margin-right: 8px;
+}
+.cellMonth {
+  margin-top: 10px;
+  height: 50px;
+  margin-left: 10px;
+  margin-right: 4px;
+  min-width: 60px;
+  max-width: 60px;
+}
+.cellYear {
+  margin-top: 10px;
+  height: 50px;
+  margin-left: 4px;
+  margin-right: 4px;
+  min-width: 70px;
+  max-width: 70px;
+}
+.cellType {
+  min-width: 55px;
+  max-width: 55px;
+}
+.cellDescription {
+  min-width: 80px;
+  max-width: 80px;
+}
+.cellCategory{
+  min-width: 65px;
+  max-width: 65px;
+  word-wrap: break-word;
+}
+.cellAction{
+  min-width: 100px;
+  max-width: 100px;
+}
+.cellDate{
+  min-width: 70px;
+  max-width: 70px;
+}
+.cellAmount{
+  min-width: 70px;
+  max-width: 70px;
+}

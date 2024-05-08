@@ -21,7 +21,7 @@ import { Category, Movement } from "../models/models";
       }
 
     
-  public getByMonth(month: number, year: number): Observable<Movement[]> {   
+  public getByMonth(month: string, year: string): Observable<Movement[]> {   
     const params = new HttpParams().set('month', month)
                                    .set('year', year);
     const urlWithParams = `${this.apiEndpoint}?${params.toString()}`;
