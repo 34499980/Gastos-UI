@@ -25,4 +25,8 @@ import { Category, Movement, SummaryByYear } from "../models/models";
   public getAll(): Observable<Movement[]> {   
       return this.httpClient.get<Movement[]>(`${this.apiEndpoint}/Due/getAllWithMovement`)
   }
+  public processByMonth(): Observable<boolean> {   
+    return this.httpClient.get<boolean>(`${this.apiEndpoint}/Due/processByMonth`)
+}
+
   }

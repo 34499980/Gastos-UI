@@ -40,4 +40,13 @@ import { Category, Movement, SummaryByYear } from "../models/models";
   public getAllTotals(): Observable<SummaryByYear[]> {   
       return this.httpClient.get<SummaryByYear[]>(`${this.apiEndpoint}/Totals/getAll`)
   }
+  public processTotals(): Observable<any> {   
+    return this.httpClient.get<any>(`${this.apiEndpoint}/Totals/processTotals`)
+  }
+  public removeOldDues(): Observable<any> {   
+  return this.httpClient.get<any>(`${this.apiEndpoint}/Totals/removeOldDues`)
+  }
+  public getTotalByMonth(): Observable<boolean> {   
+    return this.httpClient.get<boolean>(`${this.apiEndpoint}/Totals/getByMonth`)
+    }
   }

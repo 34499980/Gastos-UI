@@ -16,6 +16,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import { DialogMovement } from '../../../dialogs/dialog-movement/dialog-movement';
 import { Types } from '../../../enums/type.enums';
+import { DueService } from '../../../services/due.service';
 
 @Component({
   selector: 'summary-home',
@@ -36,6 +37,7 @@ import { Types } from '../../../enums/type.enums';
 export default class SummaryHomeComponent {
   movementService = inject(MovementService);
   dataSourceService = inject(DataSourceService);
+  dueService = inject(DueService);
   route = inject(ActivatedRoute);
   public dialogService = inject(MatDialog);
 
@@ -59,8 +61,26 @@ export default class SummaryHomeComponent {
     this.listTypes = this.route.snapshot.data['types'];
     
     this.getMovements();
-    this.loadData();  
+    this.loadData(); 
+    this.startMonthProccess(); 
     
+  }
+  startMonthProccess(){
+    this.movementService.getTotalByMonth().subscribe({
+      next: res => {
+        if(!res){
+          this.dueService.processByMonth().subscribe({
+            next: res => {
+              this.movementService.processTotals().subscribe({
+                next: res => {
+                  this.movementService.removeOldDues().subscribe()
+                }
+              })
+            }
+          })
+        }
+      } 
+    }) 
   }
   restValidation(){
    return this.salary - this.buys < 1? true: false;
@@ -68,7 +88,7 @@ export default class SummaryHomeComponent {
   getMovements(){
     this.dataTable$.pipe(
       switchMap(() =>{ 
-        const month = this.date.getMonth().toString();
+        const month = (this.date.getMonth()+1).toString();
         const year =  this.date.getFullYear().toString();
         return  this.movementService.getByMonth(month, year)
       })
@@ -96,8 +116,8 @@ export default class SummaryHomeComponent {
         this.newItem.movement = movementList;
         this.list.push(this.newItem);
       }    
-      const listResp = this.list.sort((a,b) => b.Tipo.localeCompare(a.Tipo));
-      this.dataSource.data = listResp;
+     // const listResp = this.list.sort((a,b) => b.Tipo.localeCompare(a.Tipo));
+      this.dataSource.data = this.list;
     })
   }
   createDue(amount: number, due: number): Due{
@@ -150,7 +170,7 @@ export default class SummaryHomeComponent {
         modifiedDate: '',
         typeKey: result.type,
         due: result.due > 0? this.newDue: undefined,
-        month: date.getMonth(),
+        month: date.getMonth()+1,
         year: date.getFullYear()
 
 
