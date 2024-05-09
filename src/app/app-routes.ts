@@ -30,6 +30,13 @@ export const appRoutes: Route[] = [
     loadChildren: ()=> import('../app/modules/fee/fee.routes')
   
   }
+  ,
+  {
+    
+    path: AppRoutePaths.SETTINGS,
+    loadChildren: ()=> import('../app/modules/settings/settings.routes')
+  
+  }
 ];
 
 

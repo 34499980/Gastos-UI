@@ -5,5 +5,6 @@ export enum AppRoutePaths {
     BYMONTH = 'ByMonth',
     SUMMARY = 'Summary',
     BYYEAR = 'ByYear',
-    FEE = 'Fee'
+    FEE = 'Fee',
+    SETTINGS = 'Settings'
 }
