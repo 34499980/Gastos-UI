@@ -1,3 +1,4 @@
 {
-    "apiUrl": "http://localhost:8080/api"
+    "apiUrl_": "http://localhost:8080/api",
+    "apiUrl": "https://gastos-api-2-fnigs6154-34499980s-projects.vercel.app/api"
 }
